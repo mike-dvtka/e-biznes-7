@@ -27,6 +27,7 @@ var (
 	payments = map[int]*payment{}
 	seq   = 1
 	lock  = sync.Mutex{}
+	productsPath = "/products/:id"
 )
 
 func createProduct(c echo.Context) error {
@@ -99,9 +100,9 @@ func main() {
 
 	e.GET("/products", getAllProducts)
 	e.POST("/products", createProduct)
-	e.GET("/products/:id", getProduct)
-	e.PUT("/products/:id", updateProduct)
-	e.DELETE("/products/:id", deleteProduct)
+	e.GET(productsPath, getProduct)
+	e.PUT(productsPath, updateProduct)
+	e.DELETE(productsPath, deleteProduct)
 	e.POST("/payments", createPayment)
 
 	e.Logger.Fatal(e.Start(":1323"))
